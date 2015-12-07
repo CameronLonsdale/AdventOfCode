@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+while ($line = <STDIN>) {
+	if ($line =~ /.*?[aeiou].*?[aeiou].*?[aeiou].*?/
+		&& $line =~ /([a-z])\1/
+		&& $line !~ /(ab|cd|pq|xy)/
+	) {
+		$nice++;
+	}
+}
+
+print ("$nice\n");
