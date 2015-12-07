@@ -1,0 +1,14 @@
+#!/usr/bin/python
+
+import sys
+
+paper = 0;
+for box in sys.stdin.readlines():
+    box = map(int, box.split('x'))
+    
+    l, w, h = box
+    paper += 2*l*w + 2*w*h + 2*h*l
+    box.remove(max(box))
+    paper += box[0] * box[1]
+
+print(paper);
