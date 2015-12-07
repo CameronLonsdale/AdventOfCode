@@ -5,6 +5,7 @@ while ($line = <STDIN>) {
     chomp $line;
 
     @floors = split('', $line);
+    $position = 1;
     foreach $floor (@floors) {
         if ($floor eq '(') {
             # Up one floor
@@ -13,7 +14,10 @@ while ($line = <STDIN>) {
             # Down one floor
             $nfloor--;
         }
+        last if ($nfloor == -1);
+        $position++;
     }
 }
 
-print($nfloor);
+print("$nfloor\n");
+print("$position\n");
