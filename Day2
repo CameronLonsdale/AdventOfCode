@@ -3,12 +3,18 @@
 import sys
 
 paper = 0;
+ribbon = 0;
 for box in sys.stdin.readlines():
     box = map(int, box.split('x'))
     
     l, w, h = box
     paper += 2*l*w + 2*w*h + 2*h*l
+
     box.remove(max(box))
     paper += box[0] * box[1]
 
+    ribbon += 2*box[0] + 2*box[1]
+    ribbon += l*w*h
+
 print(paper);
+print(ribbon)
