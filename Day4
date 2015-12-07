@@ -1,0 +1,8 @@
+#!/usr/bin/python
+
+import hashlib
+
+n = 0
+while hashlib.md5(b"ckczppom{0}".format(n)).hexdigest()[:5] != "00000":
+	n += 1
+print(n)
