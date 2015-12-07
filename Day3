@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+$x1 = $y1 = 0;
+$x2 = $y2 = 0;
+
+$grid{"0:0"} += 2;
+
+while ($line = <STDIN>) {
+	chomp $line;
+	$turn = 0;
+	foreach $direction (split('', $line)) {
+		if ($turn % 2) {
+			#Robot santa
+			if ($direction eq '>') { $x2 += 1; }
+			elsif ($direction eq '<') { $x2 -= 1; }
+			elsif ($direction eq '^') { $y2 += 1; }
+			else { $y2 -= 1; }
+			$grid{"$x2:$y2"} += 1;
+		} else {
+			# Santa
+			if ($direction eq '>') { $x1 += 1; }
+			elsif ($direction eq '<') { $x1 -= 1; }
+			elsif ($direction eq '^') { $y1 += 1; }
+			else { $y1 -= 1; }
+			$grid{"$x1:$y1"} += 1;
+		}
+		$turn++;
+	}
+}
+
+print(scalar(keys %grid));
