@@ -1,0 +1,22 @@
+#!/usr/bin/perl
+
+while ($line = <STDIN>) {
+	chomp $line;
+	($instruction, $start, $end) = $line =~ /(\D+) (\d+,\d+)\D+(\d+,\d+)/;
+	($x1, $y1) = split(',', $start);
+	($x2, $y2) = split(',', $end);
+
+	for $y ($y1..$y2) {
+		for $x ($x1..$x2) {
+			if ($instruction eq 'toggle') {
+				$matrix{"$x:$y"} ^= 1;
+			} elsif ($instruction eq 'turn on') {
+				$matrix{"$x:$y"} = 1;
+			} else {
+				$matrix{"$x:$y"} = 0;
+			}
+		}
+	}
+}
+
+print(scalar(grep{$_ == 1}(values %matrix)));
