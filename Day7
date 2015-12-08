@@ -1,0 +1,46 @@
+#!/usr/bin/python
+
+import sys, re
+import struct
+
+operators = {
+    'AND':' & ',
+    'OR':' | ',
+    'LSHIFT':' << ',
+    'RSHIFT':' >> ',
+    'NOT':' ~ '
+}
+wires = {}
+instructions = []
+
+for circuit in sys.stdin.readlines():
+    circuit = circuit.rstrip("\n")
+
+    # Parses intructions
+    operation, wire = circuit.split(' -> ')
+
+    code = 'wires[\''+ wire + '\']' + ' = (' 
+    for element in re.split(' *([A-Z]+) *', operation):
+        if re.match('[a-z]+', element):
+            # wire
+            code += 'wires[\'' + element + '\']'
+        elif element in operators.keys():
+            code += operators[element]
+        else:
+            # number
+            code += element
+    code += ') % 2**16'
+
+    instructions.append(code)
+
+
+# Cycle through list and execute what you can. Repeat until all gates satisfied
+while len(instructions) != 0:
+    for n in range(len(instructions)):
+        try:
+            exec(instructions[n])
+            del instructions[n]
+        except:
+            continue
+
+print('a :' + str(wires['a']))
