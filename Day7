@@ -13,6 +13,8 @@ operators = {
 wires = {}
 instructions = []
 
+#wires['a'] = 956
+
 for circuit in sys.stdin.readlines():
     circuit = circuit.rstrip("\n")
 
@@ -23,6 +25,7 @@ for circuit in sys.stdin.readlines():
     for element in re.split(' *([A-Z]+) *', operation):
         if re.match('[a-z]+', element):
             # wire
+            #if (element == 'b'): element = 'a'
             code += 'wires[\'' + element + '\']'
         elif element in operators.keys():
             code += operators[element]
