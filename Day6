@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+use List::Util qw(sum);
+
+# Commented code is for part 1
 while ($line = <STDIN>) {
 	chomp $line;
 	($instruction, $start, $end) = $line =~ /(\D+) (\d+,\d+)\D+(\d+,\d+)/;
@@ -9,14 +12,20 @@ while ($line = <STDIN>) {
 	for $y ($y1..$y2) {
 		for $x ($x1..$x2) {
 			if ($instruction eq 'toggle') {
-				$matrix{"$x:$y"} ^= 1;
+				#$matrix{"$x:$y"} ^= 1;
+				$matrix{"$x:$y"} += 2;
 			} elsif ($instruction eq 'turn on') {
-				$matrix{"$x:$y"} = 1;
+				#$matrix{"$x:$y"} = 1;
+				$matrix{"$x:$y"}++;
 			} else {
-				$matrix{"$x:$y"} = 0;
+				#$matrix{"$x:$y"} = 0;
+				if ($matrix{"$x:$y"} > 0) {
+					$matrix{"$x:$y"}--;
+				}
 			}
 		}
 	}
 }
 
-print(scalar(grep{$_ == 1}(values %matrix)));
+#print(scalar(grep{$_ == 1}(values %matrix)));
+print(sum(values %matrix));
