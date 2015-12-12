@@ -2,8 +2,11 @@
 
 import re
 
+# Uncomment for Part 2
+
 def main():
 	psswrd = list("hxbxwxba")
+	#psswrd = list("hxbxxyzz")
 	length = len(psswrd)
 	index = length - 1
 
