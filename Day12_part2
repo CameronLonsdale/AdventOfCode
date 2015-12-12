@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 from json import loads
 import sys
@@ -6,8 +6,9 @@ import sys
 def parse(jsn):
     if isinstance(jsn, int):
         return jsn
-    elif isinstance(jsn, list):
-        return sum(parse(j) for j in jsn)
+    elif isinstance(jsn, list)
+    :
+        return sum(map(parse, jsn))
     elif not isinstance(jsn, dict):
         return 0
     #elif 'red' in jsn.values():
