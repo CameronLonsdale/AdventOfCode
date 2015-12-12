@@ -1,0 +1,10 @@
+#!/usr/bin/python
+
+import sys
+
+total = 0
+for word in sys.stdin.readlines():
+	word = word.rstrip("\n")
+	total += len(word) - len(eval(word))
+
+print(total)
