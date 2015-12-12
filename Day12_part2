@@ -1,0 +1,16 @@
+#!/usr/bin/python
+
+from json import loads
+import sys
+
+def parse(jsn):
+    if type(jsn) is int:
+        return jsn
+    elif type(jsn) is list:
+        return sum(parse(j) for j in jsn)
+    elif type(jsn) is not dict:
+        return 0
+
+    return parse(list(jsn.values()))
+
+print(parse(loads(sys.stdin.read())))
