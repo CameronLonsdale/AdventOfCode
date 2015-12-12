@@ -10,6 +10,8 @@ def parse(jsn):
         return sum(parse(j) for j in jsn)
     elif type(jsn) is not dict:
         return 0
+    #elif 'red' in jsn.values():
+    #    return 0
 
     return parse(list(jsn.values()))
 
