@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+import sys, re
+
+import networkx as nx
+
+G = nx.Graph()
+
+def main():	
+	for connection in sys.stdin.readlines():
+		p = re.compile("(\w+) to (\w+) = (\d+)")
+		connection = p.match(connection)
+
+		v1, v2, dist = connection.groups()
+		G.add_edge(v1,v2,weight=int(dist))
+
+	potential_paths = []
+	weights = []
+
+	n_nodes = len(G.nodes())
+	for startnode in G.nodes():
+		for endnode in G.nodes():
+			for path in nx.all_simple_paths(G, startnode, endnode):
+				if len(path) == n_nodes: potential_paths.append(path)
+
+	for path in potential_paths:
+		weights.append(weight(path))
+
+	print min(weights)
+
+def weight(path):
+	length = len(path)
+	w = 0
+	for i in range(length-1):
+		w += G[path[i]][path[i+1]]['weight']
+	return w
+
+main()
