@@ -3,8 +3,8 @@
 num = "3113322113"
 
 
-# Iterate 40 times
-for i in range(40):
+# Iterate 40 times / 50 for part 2
+for i in range(50):
 
 	prev_digit = ''
 	frequency = 1
