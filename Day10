@@ -1,0 +1,27 @@
+#!/usr/bin/python
+
+num = "3113322113"
+
+
+# Iterate 40 times
+for i in range(40):
+
+	prev_digit = ''
+	frequency = 1
+	word = ''
+
+	i = 0
+	for digit in num:
+		if i != 0:
+			if prev_digit == digit:
+				frequency += 1
+			else:
+				word += str(frequency) + prev_digit
+				frequency = 1
+		i +=1
+		prev_digit = digit
+
+	word += str(frequency) + prev_digit
+	num = word
+
+print(len(word))
