@@ -6,6 +6,8 @@ import networkx as nx
 
 G = nx.Graph()
 
+# Uncomment for part 2
+
 def main():	
 	for connection in sys.stdin.readlines():
 		p = re.compile("(\w+) to (\w+) = (\d+)")
@@ -27,6 +29,7 @@ def main():
 		weights.append(weight(path))
 
 	print min(weights)
+	#print max(weights)
 
 def weight(path):
 	length = len(path)
