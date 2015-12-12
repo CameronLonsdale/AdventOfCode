@@ -4,11 +4,11 @@ from json import loads
 import sys
 
 def parse(jsn):
-    if type(jsn) is int:
+    if isinstance(jsn, int):
         return jsn
-    elif type(jsn) is list:
+    elif isinstance(jsn, list):
         return sum(parse(j) for j in jsn)
-    elif type(jsn) is not dict:
+    elif not isinstance(jsn, dict):
         return 0
     #elif 'red' in jsn.values():
     #    return 0
