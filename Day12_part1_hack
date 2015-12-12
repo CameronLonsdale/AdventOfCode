@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+
+use List::Util qw(sum);
+
+while ($line = <STDIN>) {
+	@numbers = $line =~ /-?\d+/g;
+}
+print sum(@numbers);
