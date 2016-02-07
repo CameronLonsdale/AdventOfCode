@@ -1,0 +1,58 @@
+#!/usr/bin/python3
+
+import sys
+import re
+from itertools import combinations_with_replacement
+from collections import defaultdict
+
+ingredients = []
+scores = []
+
+class Ingredient:
+	def __init__(self, name, cap, dur, flav, text, cal):
+		self.name = name
+		self.capacity = cap
+		self.durability = dur
+		self.flavor = flav
+		self.texture = text
+		self.calories = cal
+
+
+def read_input(stdin):
+	for line in stdin:
+		line = line.rstrip()
+		line = line.split(':')
+
+		name = line[0]
+		digits = re.findall('-?\d+', line[1])
+
+		ingredients.append(Ingredient(name, int(digits[0]), 
+									int(digits[1]), int(digits[2]), 
+									int(digits[3]), int(digits[4])))
+
+read_input(sys.stdin)
+
+for comb in combinations_with_replacement(ingredients, 100):
+	total_capacity = 0
+	total_durability = 0
+	total_flavor = 0
+	total_texture = 0
+	total_calories = 0
+
+	for ingredient in comb:
+		total_capacity += ingredient.capacity
+		total_durability += ingredient.durability
+		total_flavor += ingredient.flavor
+		total_texture += ingredient.texture
+		total_calories += ingredient.calories
+
+	if total_capacity < 0 : total_capacity = 0
+	if total_durability < 0 : total_durability = 0
+	if total_flavor < 0 : total_flavor = 0
+	if total_texture < 0 : total_texture = 0
+
+	if total_calories == 500:
+		total_score = total_capacity * total_durability * total_flavor * total_texture
+		scores.append(total_score)
+
+print(max(scores))
