@@ -1,0 +1,65 @@
+#!/usr/bin/python3
+
+import sys
+
+reindeers = []
+
+class Reindeer:	
+	distance = 0
+	points = 0
+
+	def __init__(self, name, speed, duration, rest):
+		self.name = name
+		self.speed = speed
+
+		self.start_duration = duration
+		self.start_rest = rest
+
+		self.duration = duration
+		self.rest = rest
+
+	def race(self):
+		if self.duration > 0:
+			self.distance += self.speed
+			self.duration -= 1
+		elif self.rest > 0:
+			self.rest -= 1
+		else:
+			self.duration = self.start_duration
+			self.rest = self.start_rest
+			self.race()
+
+	def add_point(self):
+		self.points += 1
+
+def read_input(stdin):
+	for line in stdin:
+		line = line.rstrip()
+		line = line.split()
+
+		name = line[0] 
+		speed = int(line[3])
+		duration = int(line[6])
+		rest = int(line[-2])
+
+		reindeer = Reindeer(name, speed, duration, rest)
+		reindeers.append(reindeer)
+
+
+TIME_IN_SECONDS = 2503
+read_input(sys.stdin)
+
+for seconds in range(TIME_IN_SECONDS):
+	for reindeer in reindeers:
+		reindeer.race()
+
+	leaderboard = sorted(reindeers, key=lambda x: x.distance, reverse=True)
+	leaderboard[0].add_point()
+
+
+
+leaderboard = sorted(reindeers, key=lambda x: x.distance, reverse=True)
+print(leaderboard[0].distance)
+
+leaderboard = sorted(reindeers, key=lambda x: x.points, reverse=True)
+print(leaderboard[0].points)
