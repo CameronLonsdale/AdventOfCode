@@ -1,0 +1,51 @@
+#!/usr/bin/python3
+import sys
+from collections import defaultdict
+from itertools import permutations
+
+relationships = defaultdict(dict)
+changes = []
+total_change = 0
+
+def unique_cyclic_permutations(thing, length):
+    if length == 0:
+        yield (); return
+    for x in permutations(thing[1:], length - 1):
+        yield (thing[0],) + x
+    if length < len(thing):
+        yield from unique_cyclic_permutations(thing[1:], length)
+
+def read_input(stdin):
+	for line in stdin:
+		line = line.rstrip()
+		line = line.split()
+
+		source = line[0]
+		sign = line[2]
+		value = int(line[3])
+		target = line[-1].strip('.')
+
+		if sign == "lose":
+			value = -1 * value
+
+		relationships[source][target] = value
+
+
+read_input(sys.stdin)
+names = list(relationships.keys())
+perms = unique_cyclic_permutations(names, len(names))
+
+for perm in perms:
+	total_change = 0
+	for i in range(len(perm)):
+		source = perm[i]
+		left = perm[i-1]
+		right = perm[(i+2) % len(perm)-1]
+
+		total_change += relationships[source][left]
+		total_change += relationships[source][right]
+
+	changes.append(total_change)
+
+
+print(max(changes))
