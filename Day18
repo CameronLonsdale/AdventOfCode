@@ -1,0 +1,62 @@
+#!/usr/bin/python3
+
+import sys
+
+def getNeighbors(cell):
+    x, y = cell
+    if x > 0 and y > 0: yield x - 1, y - 1 
+    if y > 0: yield x, y - 1 
+    if x < SIZE - 1 and y > 0: yield x + 1, y - 1 
+    if x > 0: yield x - 1, y 
+    if x < SIZE - 1: yield x + 1, y 
+    if x > 0 and y < SIZE - 1: yield x - 1, y + 1 
+    if y < SIZE - 1: yield x, y + 1 
+    if x < SIZE - 1 and y < SIZE - 1: yield x + 1, y + 1 
+
+def applyIteration(board):
+    new_board = set([])
+    candidates = board.union(set(n for cell in board for n in getNeighbors(cell)))
+    for cell in candidates:
+        if cell in [(0, 0), (0, SIZE-1), (SIZE-1, 0), (SIZE-1, SIZE-1)]:
+            new_board.add(cell)
+        else:
+            count = sum((n in board) for n in getNeighbors(cell))
+            if count == 3  or (count == 2 and cell in board):
+                new_board.add(cell)
+    return new_board
+
+
+def setupBoard(stdin):
+    board = set([])
+
+    row = 0
+    for line in stdin:
+        col = 0
+        line = line.rstrip()
+        for char in line:
+            if char == '#':
+                board.add((col, row))
+            col += 1
+        row += 1
+
+    return board
+    
+def formattedBoard(board):
+    boardformat = [['.' for x in range(SIZE)] for y in range(SIZE)]
+    for coord in board:
+        x, y = coord
+        boardformat[y][x] = '#'
+    return boardformat
+
+SIZE = 100
+current_board = setupBoard(sys.stdin)
+
+ITERATIONS = 100
+for iteration in range(ITERATIONS):
+    current_board = applyIteration(current_board)
+
+print(len(current_board))
+
+# boardformat = formattedBoard(current_board)
+# for row in boardformat:
+#     print(''.join(row))
