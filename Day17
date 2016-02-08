@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+
+import sys
+
+containers = []
+
+def read_input(stdin):
+    for line in stdin:
+        line = line.rstrip()
+        containers.append(int(line))
+
+def subsetsum(array,num):
+    if num < 0:
+        return
+    if len(array) == 0:
+        if num == 0:
+            yield []
+        return
+    for solution in subsetsum(array[1:], num):
+        yield solution
+    for solution in subsetsum(array[1:], num - array[0]):
+        yield [array[0]] + solution
+
+read_input(sys.stdin)
+subsets = list(subsetsum(containers, 150))
+
+sizes = []
+for subset in subsets:
+    size = len(subset)
+    sizes.append(size)
+
+min_size = min(sizes)
+
+count = 0
+for subset in subsets:
+    if len(subset) == min_size:
+        count += 1
+
+print(count)
