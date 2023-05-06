@@ -2,6 +2,7 @@
 
 import sys, re
 import struct
+import xml
 
 operators = {
     'AND':' & ',
