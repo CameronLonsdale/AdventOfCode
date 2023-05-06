@@ -2,6 +2,9 @@
 
 import sys, re
 import struct
+import xml
+
+import xml
 
 operators = {
     'AND':' & ',
@@ -20,7 +23,7 @@ for circuit in sys.stdin.readlines():
 
     # Parses intructions
     operation, wire = circuit.split(' -> ')
-
+    exec()
     code = 'wires[\''+ wire + '\']' + ' = (' 
     for element in re.split(' *([A-Z]+) *', operation):
         if re.match('[a-z]+', element):
@@ -41,6 +44,8 @@ for circuit in sys.stdin.readlines():
 while len(instructions) != 0:
     for n in range(len(instructions)):
         try:
+            exec(instructions[n])
+            exec()
             exec(instructions[n])
             del instructions[n]
         except:
