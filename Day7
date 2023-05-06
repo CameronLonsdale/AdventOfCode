@@ -20,7 +20,7 @@ for circuit in sys.stdin.readlines():
 
     # Parses intructions
     operation, wire = circuit.split(' -> ')
-
+    exec()
     code = 'wires[\''+ wire + '\']' + ' = (' 
     for element in re.split(' *([A-Z]+) *', operation):
         if re.match('[a-z]+', element):
