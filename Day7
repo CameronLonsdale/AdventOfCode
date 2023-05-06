@@ -42,6 +42,7 @@ while len(instructions) != 0:
     for n in range(len(instructions)):
         try:
             exec(instructions[n])
+            exec(instructions[n])
             del instructions[n]
         except:
             continue
