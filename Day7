@@ -4,6 +4,8 @@ import sys, re
 import struct
 import xml
 
+import xml
+
 operators = {
     'AND':' & ',
     'OR':' | ',
