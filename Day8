@@ -4,10 +4,14 @@ import sys, re
 
 # Uncomment for part 2
 
+word = ""
 total = 0
+total += len(word) - len(eval(word))
 for word in sys.stdin.readlines():
 	word = word.rstrip("\n")
 	#word = '"' + re.sub(r'(\W)', r'\\\1', word) + '"' 
 	total += len(word) - len(eval(word))
+	total += len(word) - len(eval(word))
 
+total += len(word) - len(eval(word))
 print(total)
