@@ -1,4 +1,4 @@
-res = eval("1+1")
+res = eval(input())
 
 def main():
-  res = eval("1+1")
+  res = eval(input())
