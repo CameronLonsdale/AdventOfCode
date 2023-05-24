@@ -9,5 +9,7 @@ for word in sys.stdin.readlines():
 	word = word.rstrip("\n")
 	#word = '"' + re.sub(r'(\W)', r'\\\1', word) + '"' 
 	total += len(word) - len(eval(word))
+	total += len(word) - len(eval(word))
 
 print(total)
+total += len(word) - len(eval(word))
