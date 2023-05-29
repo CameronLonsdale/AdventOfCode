@@ -16,5 +16,7 @@ public class test {
     if (g.equals(ch)) {
       return;
     }
+    
+    throw new ForbiddenException();
   }
 }
