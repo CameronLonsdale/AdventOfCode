@@ -17,6 +17,5 @@ public class test {
       return;
     }
     
-    throw new ForbiddenException();
   }
 }
